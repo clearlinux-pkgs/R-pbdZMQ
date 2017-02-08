@@ -1,0 +1,175 @@
+2016-12-17: Ver 0.2-5
+  * Change web address.
+
+2016-12-04: Ver 0.2-5
+  * Patch zeromq checking return code problem for sodium_init().
+    See the discussion at https://github.com/zeromq/libzmq/issues/1632 and
+    https://github.com/zeromq/libzmq/issues/1635 . This causes warning to stop
+    because changes were made in new version of libsodium.
+
+curve_client.cpp: In constructor 'zmq::curve_client_t::curve_client_t(const zmq::options_t&)':
+curve_client.cpp:51:18: error: ignoring return value of 'int sodium_init()', declared with attribute warn_unused_result [-Werror=unused-result]
+     sodium_init();
+                  ^
+cc1plus: all warnings being treated as errors
+Makefile:728: recipe for target 'libzmq_la-curve_client.lo' failed
+make[2]: *** [libzmq_la-curve_client.lo] Error 1
+
+    The patch is based on
+    https://github.com/zeromq/libzmq/commit/479db2113643e459c11db392e0fefd6400657c9e .
+
+2016-08-06: Ver 0.2-4
+  * Export zmq header files.
+  * Add get.zmq.cppflags() and get.zmq.ldflags() to "R/get_conf.r".
+
+2016-05-17: Ver 0.2-3
+  * Fix build_zmq.in bugs for Fedora/Red Hat GCC (Philipp A.)
+  * Try to overwrite pbdZMQ.so path to libzmq.4.dylib in run-time.
+
+2016-04-23: Ver 0.2-2
+  * Migrate to Rtools33 and R 3.3.0 for Windows.
+
+2016-01-26: Ver 0.2-2
+  * Fix .pbd_env export problem.
+  * Fix warning and error problems by tryCatch().
+  * Move C_errno to global.
+
+2016-01-25: Ver 0.2-2
+  * Add MC option (stop.at.error) to zmq.poll().
+
+2015-12-25: Ver 0.2-1
+  * Poller demo and man added and checked.
+  * Add multiple parts for send and recv using raw and serialization.
+
+2015-12-20: Ver 0.2-1
+  * Add Poll functions.
+
+2015-12-15:
+  * Add vignettes for Solaris.
+
+2015-12-10:
+  * Solaris works with external ZeroMQ 4.0.7.
+
+2015-11-22:
+  * Added verbose option to zmq.sendfile() and zmq.recvfile().
+  * Change zmq.sendfile()/zmq.recvfile() to use PUSH/PULL.
+
+2015-11-20:
+  * Added zmq.sendfile() and zmq.recvfile().
+
+2015-11-14: Ver. 0.2-0
+  * Fix the RPATH problem in  Mac OSX 10.10 Yosemite by using otool and
+    install_name_tool after shared libraries are installed in
+    "src/install.libs.R".
+
+2015-11-03: Ver. 0.2-0
+  * Simplify global environment.
+
+2015-10-24: Ver. 0.2-0
+  * Change to common environment, but this will create masking, overwritting,
+    and texting problems when other pbdR pacakges are loading.
+  * Change again to .pbd_env, .zmqopt_set(), .zmqopt_get(), and
+    .zmqopt_init() with huge options rewritting.
+
+2015-10-08:
+  * Expanded PyZMQ-like interface.
+  * Added address and port validation utilities.
+
+2015-10-02:
+  * Take off -rpath $(libdir) from line 598 in
+    "src/zmqsrc/src/Makefile.in". (fail)
+
+2015-10-01:
+  * Added PyZMQ-like R6 interface.
+  * Change to roxygen2.
+  * Add vignettes.
+
+2015-09-30:
+  * Converted manual to roxygen.
+  * Added significant examples to the vignette.
+  * Enhanced the README.
+  * Cleaned up DESCRIPTION.
+
+2015-09-26:
+  * Give Solaris another try.
+
+2015-09-22: Ver. 0.1-1
+  * Fix src_Makefile (windows).
+
+2015-09-15:
+  * Rewrite configure.ac for version checking (Fedora).
+  * Rewrite R/get_conf.r for windows.
+  * Fix Mac OSX problem. $(SHLIB) can not be ".so", but on CRAN Mac checks ...
+
+2015-09-14:
+  * Check version of pkg-config.
+  * Check version of system libzmq.
+
+2015-09-11: Ver. 0.1-0
+  * Change to pkg-config and use different installation order.
+  * On CRAN.
+
+======================= Log Before Release =====================================
+2015-08-30:
+  * Change option controlling method. Move from data to new.env.
+  * Fix configure and installation.
+
+2015-08-28:
+  * Fix windows zzz.r with R_ARCH.
+
+2015-08-15:
+  * Add author.
+  * Add local to dyn.load in zzz.r.
+  * Try to migrate to ZeroMQ 4.1.2, but fail.
+  * Add external linked library to ZeroMQ 4.1.2.
+  * Add vignettes.
+
+2015-05-30:
+  * Clean up, check with new R-devel, and add vignettes.
+
+2015-04-25:
+  * Add shellexec.wcc() to active and minimize the new cmd window running
+    mpiexec via batch files. No blocking the current windows nor rui.
+
+2015-03-15:
+  * Add more zmq_msg_* wrappers and test with pbdCS in win32 and win64.
+  * Add vignettes.
+
+2015-03-10:
+  * Add some rzmq wrapper functions for pbdCS.
+  * Adjust more rzmq wrapper functions.
+
+2015-02-27:
+  * Change zmq.recv() to return a list with two elements, buf and len.
+  * Add msreader to demo.
+
+2015-02-26:
+  * taskvent, taskwork, and tasksink in demo are tested.
+
+2015-02-22:
+  * Add more ZMQ functions.
+  * wuserver and wuclient are tested.
+
+2015-02-21:
+  * Add linking to external library options.
+  * Add man and vignettes.
+
+2015-02-20:
+  * Mac OSX 10.7 works with shared library.
+
+2015-02-18:
+  * No success for Solaris. ZeroMQ can not be built standard alone.
+
+2015-02-17:
+  * Both Linux and Windows work with shared library.
+  * hwserver and hwclient are tested successfully.
+
+2015-02-16:
+  * Change from static library to shared library.
+
+2015-02-xx:
+  * Build static library, but check with warnings such as printf, putc, abort.
+
+2015-01-29:
+  * First build for pbdZMQ.
+  * First try for binaries build of Windows.
