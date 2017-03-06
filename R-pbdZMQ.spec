@@ -4,7 +4,7 @@
 #
 Name     : R-pbdZMQ
 Version  : 0.2
-Release  : 1
+Release  : 2
 URL      : https://cran.r-project.org/src/contrib/pbdZMQ_0.2-5.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/pbdZMQ_0.2-5.tar.gz
 Summary  : The ZeroMQ messaging library
