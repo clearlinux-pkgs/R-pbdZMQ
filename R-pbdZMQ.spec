@@ -4,7 +4,7 @@
 #
 Name     : R-pbdZMQ
 Version  : 0.2.5
-Release  : 5
+Release  : 6
 URL      : https://cran.r-project.org/src/contrib/pbdZMQ_0.2-5.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/pbdZMQ_0.2-5.tar.gz
 Summary  : The ZeroMQ messaging library
@@ -38,12 +38,15 @@ lib components for the R-pbdZMQ package.
 %setup -q -c -n pbdZMQ
 
 %build
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1489129015
+export SOURCE_DATE_EPOCH=1492804046
 
 %install
 rm -rf %{buildroot}
-export SOURCE_DATE_EPOCH=1489129015
+export SOURCE_DATE_EPOCH=1492804046
 export LANG=C
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
 export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
@@ -59,7 +62,7 @@ R CMD INSTALL --install-tests --built-timestamp=${SOURCE_DATE_EPOCH} --build  -l
 export LANG=C
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost
+export no_proxy=localhost,127.0.0.1,0.0.0.0
 export _R_CHECK_FORCE_SUGGESTS_=false
 R CMD check --no-manual --no-examples --no-codoc -l %{buildroot}/usr/lib64/R/library pbdZMQ
 
@@ -71,6 +74,7 @@ R CMD check --no-manual --no-examples --no-codoc -l %{buildroot}/usr/lib64/R/lib
 /usr/lib64/R/library/pbdZMQ/INDEX
 /usr/lib64/R/library/pbdZMQ/Meta/Rd.rds
 /usr/lib64/R/library/pbdZMQ/Meta/demo.rds
+/usr/lib64/R/library/pbdZMQ/Meta/features.rds
 /usr/lib64/R/library/pbdZMQ/Meta/hsearch.rds
 /usr/lib64/R/library/pbdZMQ/Meta/links.rds
 /usr/lib64/R/library/pbdZMQ/Meta/nsInfo.rds
