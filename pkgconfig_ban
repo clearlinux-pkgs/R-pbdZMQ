@@ -2,3 +2,4 @@
 # but are undesirable. One entry per line, no whitespace.
 libzmq
 openpgm-5.2
+libsodium
