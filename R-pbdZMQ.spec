@@ -4,19 +4,17 @@
 #
 Name     : R-pbdZMQ
 Version  : 0.3.3
-Release  : 28
+Release  : 29
 URL      : https://cran.r-project.org/src/contrib/pbdZMQ_0.3-3.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/pbdZMQ_0.3-3.tar.gz
 Summary  : Programming with Big Data -- Interface to 'ZeroMQ'
 Group    : Development/Tools
 License  : GPL-3.0 LGPL-3.0
 Requires: R-pbdZMQ-lib
-BuildRequires : asciidoc
 BuildRequires : clr-R-helpers
+BuildRequires : libzmq-dev
 BuildRequires : pkgconfig(libunwind)
 BuildRequires : sed
-BuildRequires : valgrind
-BuildRequires : xmlto
 
 %description
 asynchronous messaging in scalable, distributed applications.  This
@@ -43,11 +41,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1526831812
+export SOURCE_DATE_EPOCH=1526838400
 
 %install
 rm -rf %{buildroot}
-export SOURCE_DATE_EPOCH=1526831812
+export SOURCE_DATE_EPOCH=1526838400
 export LANG=C
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
 export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
@@ -134,20 +132,12 @@ cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
 /usr/lib64/R/library/pbdZMQ/html/00Index.html
 /usr/lib64/R/library/pbdZMQ/html/R.css
 /usr/lib64/R/library/pbdZMQ/libs/symbols.rds
-/usr/lib64/R/library/pbdZMQ/zmq/include/R_zmq.h
-/usr/lib64/R/library/pbdZMQ/zmq/include/zmq.h
-/usr/lib64/R/library/pbdZMQ/zmq/include/zmq.hpp
-/usr/lib64/R/library/pbdZMQ/zmq/include/zmq_addon.hpp
-/usr/lib64/R/library/pbdZMQ/zmq/include/zmq_utils.h
 /usr/lib64/R/library/pbdZMQ/zmq_copyright/AUTHORS
 /usr/lib64/R/library/pbdZMQ/zmq_copyright/COPYING
 /usr/lib64/R/library/pbdZMQ/zmq_copyright/COPYING.LESSER
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/R/library/pbdZMQ/libs/libzmq.so
-/usr/lib64/R/library/pbdZMQ/libs/libzmq.so.avx2
-/usr/lib64/R/library/pbdZMQ/libs/libzmq.so.avx512
 /usr/lib64/R/library/pbdZMQ/libs/pbdZMQ.so
 /usr/lib64/R/library/pbdZMQ/libs/pbdZMQ.so.avx2
 /usr/lib64/R/library/pbdZMQ/libs/pbdZMQ.so.avx512
