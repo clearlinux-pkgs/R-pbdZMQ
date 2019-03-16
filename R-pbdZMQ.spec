@@ -4,26 +4,24 @@
 #
 Name     : R-pbdZMQ
 Version  : 0.3.3
-Release  : 34
+Release  : 35
 URL      : https://cran.r-project.org/src/contrib/pbdZMQ_0.3-3.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/pbdZMQ_0.3-3.tar.gz
-Summary  : Programming with Big Data -- Interface to 'ZeroMQ'
+Summary  : Programming with Big Data – Interface to 'ZeroMQ'
 Group    : Development/Tools
 License  : GPL-3.0 LGPL-3.0
-Requires: R-pbdZMQ-lib
-BuildRequires : clr-R-helpers
+Requires: R-pbdZMQ-lib = %{version}-%{release}
+BuildRequires : buildreq-R
 BuildRequires : libzmq-dev
 BuildRequires : pkgconfig(libunwind)
 BuildRequires : sed
 
 %description
-asynchronous messaging in scalable, distributed applications.  This
-    package provides high level R wrapper functions to easily utilize
-    'ZeroMQ'. We mainly focus on interactive client/server programming
-    frameworks. For convenience, a minimal 'ZeroMQ' library (4.2.2)
-    is shipped with 'pbdZMQ', which can be used if no system installation
-    of 'ZeroMQ' is available.  A few wrapper functions compatible with
-    'rzmq' are also provided.
+# pbdZMQ
+* **License:** [![License](http://img.shields.io/badge/license-GPL%20v3-orange.svg?style=flat)](http://www.gnu.org/licenses/gpl-3.0.en.html)
+* **Download:** [![Download](http://cranlogs.r-pkg.org/badges/pbdZMQ)](https://cran.r-project.org/package=pbdZMQ)
+* **Status:** [![Build Status](https://travis-ci.org/snoweye/pbdZMQ.png)](https://travis-ci.org/snoweye/pbdZMQ) [![Appveyor Build status](https://ci.appveyor.com/api/projects/status/32r7s2skrgm9ubva?svg=true)](https://ci.appveyor.com/project/snoweye/pbdZMQ)
+* **Author:** See section below.
 
 %package lib
 Summary: lib components for the R-pbdZMQ package.
@@ -41,11 +39,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1526838400
+export SOURCE_DATE_EPOCH=1552780286
 
 %install
+export SOURCE_DATE_EPOCH=1552780286
 rm -rf %{buildroot}
-export SOURCE_DATE_EPOCH=1526838400
 export LANG=C
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
 export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
@@ -63,9 +61,9 @@ echo "FFLAGS = $FFLAGS -march=haswell -ftree-vectorize " >> ~/.R/Makevars
 echo "CXXFLAGS = $CXXFLAGS -march=haswell -ftree-vectorize " >> ~/.R/Makevars
 R CMD INSTALL --install-tests --built-timestamp=${SOURCE_DATE_EPOCH} --build  -l %{buildroot}/usr/lib64/R/library pbdZMQ
 for i in `find %{buildroot}/usr/lib64/R/ -name "*.so"`; do mv $i $i.avx2 ; mv $i.avx2 ~/.stash/; done
-echo "CFLAGS = $CFLAGS -march=skylake-avx512 -ftree-vectorize -mprefer-vector-width=512 " > ~/.R/Makevars
-echo "FFLAGS = $FFLAGS -march=skylake-avx512 -ftree-vectorize -mprefer-vector-width=512 " >> ~/.R/Makevars
-echo "CXXFLAGS = $CXXFLAGS -march=skylake-avx512 -ftree-vectorize -mprefer-vector-width=512  " >> ~/.R/Makevars
+echo "CFLAGS = $CFLAGS -march=skylake-avx512 -ftree-vectorize " > ~/.R/Makevars
+echo "FFLAGS = $FFLAGS -march=skylake-avx512 -ftree-vectorize " >> ~/.R/Makevars
+echo "CXXFLAGS = $CXXFLAGS -march=skylake-avx512 -ftree-vectorize " >> ~/.R/Makevars
 R CMD INSTALL --preclean --install-tests --no-test-load --built-timestamp=${SOURCE_DATE_EPOCH} --build  -l %{buildroot}/usr/lib64/R/library pbdZMQ
 for i in `find %{buildroot}/usr/lib64/R/ -name "*.so"`; do mv $i $i.avx512 ; mv $i.avx512 ~/.stash/; done
 echo "CFLAGS = $CFLAGS -ftree-vectorize " > ~/.R/Makevars
@@ -80,8 +78,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export _R_CHECK_FORCE_SUGGESTS_=false
-R CMD check --no-manual --no-examples --no-codoc -l %{buildroot}/usr/lib64/R/library pbdZMQ|| : 
-cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
+R CMD check --no-manual --no-examples --no-codoc  pbdZMQ || :
 
 
 %files
@@ -131,7 +128,9 @@ cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
 /usr/lib64/R/library/pbdZMQ/help/pbdZMQ.rdx
 /usr/lib64/R/library/pbdZMQ/html/00Index.html
 /usr/lib64/R/library/pbdZMQ/html/R.css
-/usr/lib64/R/library/pbdZMQ/libs/symbols.rds
+/usr/lib64/R/library/pbdZMQ/tests/address.R
+/usr/lib64/R/library/pbdZMQ/tests/ports.R
+/usr/lib64/R/library/pbdZMQ/tests/send_recv.R
 /usr/lib64/R/library/pbdZMQ/zmq_copyright/AUTHORS
 /usr/lib64/R/library/pbdZMQ/zmq_copyright/COPYING
 /usr/lib64/R/library/pbdZMQ/zmq_copyright/COPYING.LESSER
@@ -139,5 +138,4 @@ cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/R/library/pbdZMQ/libs/pbdZMQ.so
-/usr/lib64/R/library/pbdZMQ/libs/pbdZMQ.so.avx2
 /usr/lib64/R/library/pbdZMQ/libs/pbdZMQ.so.avx512
