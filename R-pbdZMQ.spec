@@ -4,7 +4,7 @@
 #
 Name     : R-pbdZMQ
 Version  : 0.3.3
-Release  : 39
+Release  : 40
 URL      : https://cran.r-project.org/src/contrib/pbdZMQ_0.3-3.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/pbdZMQ_0.3-3.tar.gz
 Summary  : Programming with Big Data – Interface to 'ZeroMQ'
@@ -39,10 +39,10 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1552933605
+export SOURCE_DATE_EPOCH=1556469305
 
 %install
-export SOURCE_DATE_EPOCH=1552933605
+export SOURCE_DATE_EPOCH=1556469305
 rm -rf %{buildroot}
 export LANG=C
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
@@ -78,7 +78,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export _R_CHECK_FORCE_SUGGESTS_=false
-R CMD check --no-manual --no-examples --no-codoc  pbdZMQ || :
+R CMD check --no-manual --no-examples --no-codoc pbdZMQ || :
 
 
 %files
@@ -138,4 +138,3 @@ R CMD check --no-manual --no-examples --no-codoc  pbdZMQ || :
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/R/library/pbdZMQ/libs/pbdZMQ.so
-/usr/lib64/R/library/pbdZMQ/libs/pbdZMQ.so.avx512
