@@ -4,7 +4,7 @@
 #
 Name     : R-pbdZMQ
 Version  : 0.3.3
-Release  : 49
+Release  : 50
 URL      : https://cran.r-project.org/src/contrib/pbdZMQ_0.3-3.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/pbdZMQ_0.3-3.tar.gz
 Summary  : Programming with Big Data -- Interface to 'ZeroMQ'
@@ -15,7 +15,6 @@ BuildRequires : buildreq-R
 BuildRequires : libzmq-dev
 BuildRequires : pkgconfig(libunwind)
 BuildRequires : sed
-BuildRequires : util-linux
 
 %description
 asynchronous messaging in scalable, distributed applications.  This
@@ -43,10 +42,10 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1589523004
+export SOURCE_DATE_EPOCH=1589523826
 
 %install
-export SOURCE_DATE_EPOCH=1589523004
+export SOURCE_DATE_EPOCH=1589523826
 rm -rf %{buildroot}
 export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
