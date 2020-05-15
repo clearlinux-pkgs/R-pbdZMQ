@@ -4,10 +4,10 @@
 #
 Name     : R-pbdZMQ
 Version  : 0.3.3
-Release  : 48
+Release  : 49
 URL      : https://cran.r-project.org/src/contrib/pbdZMQ_0.3-3.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/pbdZMQ_0.3-3.tar.gz
-Summary  : Programming with Big Data – Interface to 'ZeroMQ'
+Summary  : Programming with Big Data -- Interface to 'ZeroMQ'
 Group    : Development/Tools
 License  : GPL-3.0 LGPL-3.0
 Requires: R-pbdZMQ-lib = %{version}-%{release}
@@ -18,11 +18,13 @@ BuildRequires : sed
 BuildRequires : util-linux
 
 %description
-# pbdZMQ
-* **License:** [![License](http://img.shields.io/badge/license-GPL%20v3-orange.svg?style=flat)](http://www.gnu.org/licenses/gpl-3.0.en.html)
-* **Download:** [![Download](http://cranlogs.r-pkg.org/badges/pbdZMQ)](https://cran.r-project.org/package=pbdZMQ)
-* **Status:** [![Build Status](https://travis-ci.org/snoweye/pbdZMQ.png)](https://travis-ci.org/snoweye/pbdZMQ) [![Appveyor Build status](https://ci.appveyor.com/api/projects/status/32r7s2skrgm9ubva?svg=true)](https://ci.appveyor.com/project/snoweye/pbdZMQ)
-* **Author:** See section below.
+asynchronous messaging in scalable, distributed applications.  This
+    package provides high level R wrapper functions to easily utilize
+    'ZeroMQ'. We mainly focus on interactive client/server programming
+    frameworks. For convenience, a minimal 'ZeroMQ' library (4.2.2)
+    is shipped with 'pbdZMQ', which can be used if no system installation
+    of 'ZeroMQ' is available.  A few wrapper functions compatible with
+    'rzmq' are also provided.
 
 %package lib
 Summary: lib components for the R-pbdZMQ package.
@@ -34,21 +36,22 @@ lib components for the R-pbdZMQ package.
 
 %prep
 %setup -q -c -n pbdZMQ
+cd %{_builddir}/pbdZMQ
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1571872156
+export SOURCE_DATE_EPOCH=1589523004
 
 %install
-export SOURCE_DATE_EPOCH=1571872156
+export SOURCE_DATE_EPOCH=1589523004
 rm -rf %{buildroot}
 export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
-export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
-export FFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
+export FCFLAGS="$FFLAGS -O3 -flto -fno-semantic-interposition "
+export FFLAGS="$FFLAGS -O3 -flto -fno-semantic-interposition "
 export CXXFLAGS="$CXXFLAGS -O3 -flto -fno-semantic-interposition "
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
@@ -73,14 +76,6 @@ echo "CXXFLAGS = $CXXFLAGS -ftree-vectorize " >> ~/.R/Makevars
 R CMD INSTALL --preclean --install-tests --built-timestamp=${SOURCE_DATE_EPOCH} --build  -l %{buildroot}/usr/lib64/R/library pbdZMQ
 cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
 %{__rm} -rf %{buildroot}%{_datadir}/R/library/R.css
-%check
-export LANG=C.UTF-8
-export http_proxy=http://127.0.0.1:9/
-export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost,127.0.0.1,0.0.0.0
-export _R_CHECK_FORCE_SUGGESTS_=false
-R CMD check --no-manual --no-examples --no-codoc pbdZMQ || :
-
 
 %files
 %defattr(-,root,root,-)
