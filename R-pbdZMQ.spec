@@ -4,7 +4,7 @@
 #
 Name     : R-pbdZMQ
 Version  : 0.3.7
-Release  : 70
+Release  : 71
 URL      : https://cran.r-project.org/src/contrib/pbdZMQ_0.3-7.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/pbdZMQ_0.3-7.tar.gz
 Summary  : Programming with Big Data -- Interface to 'ZeroMQ'
