@@ -1,5 +1,5 @@
 PKG_NAME := R-pbdZMQ
-URL = https://cran.r-project.org/src/contrib/pbdZMQ_0.3-13.tar.gz
+URL = https://ftp.osuosl.org/pub/cran/src/contrib/pbdZMQ_0.3-14.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common
